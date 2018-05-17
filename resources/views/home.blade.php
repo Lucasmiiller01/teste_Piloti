@@ -20,24 +20,28 @@
                         <br>
                         -- Lista de usuários menos o ADM -- </center>
                         <?php foreach ($users as $user): ?>
+                            <?php if ($user->name != 'admin' ): ?>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                      <div class="col-md-6" style="margin-bottom:10px; margin-top:10px;">
+                                        <li> {{ $user->name}}</li>
+                                      </div>
 
-                          <div class="row">
-                              <div class="col-md-12">
-                                <div class="col-md-6" style="margin-bottom:10px; margin-top:10px;">
-                                  <li> {{ $user->name}}</li>
+                                      <div class="col-md-3" style="margin-bottom:10px; margin-top:10px;">
+                                        <form action="" method="get">
+                                             <input type="submit" value="Deletar" name="{{ $user->id}}" class="btn btn-primary">
+                                        </form>
+                                      </div>
+                                      <div class="col-md-3" style="margin-bottom:10px; margin-top:10px;">
+                                        <form action="" method="get">
+                                             <input type="submit" value="Editar" name="{{ $user->id}}" class="btn btn-primary">
+                                        </form>
+                                      </div>
+                                    </div>
                                 </div>
-
-                                <div class="col-md-6" style="margin-bottom:10px; margin-top:10px;">
-                                    <button type="submit" class="btn btn-primary">
-                                        Remover
-                                    </button>
-                                </div>
-                              </div>
-                          </div>
-
+                            <?php endif; ?>
                         <?php endforeach; ?>
-
-                    <?php endif; ?>
+                  <?php endif; ?>
 
 
                 </div>
@@ -46,4 +50,6 @@
     </div>
 
 </div>
+
+
 @endsection
