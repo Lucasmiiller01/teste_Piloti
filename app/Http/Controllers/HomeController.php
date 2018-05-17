@@ -25,20 +25,30 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $deleted = DB::table('deleted')->select('name')->get();
+        $users = DB::table('users')->select('id','name')->get();
+        return view('home', ['users' => $users, 'deleted'  => $deleted]);
     }
 
     public function getUsers()
     {
+        $deleted = DB::table('deleted')->select('name')->get();
         $users = DB::table('users')->select('id','name')->get();
-        return view('home', ['users' => $users]);
-        dd($users);
+        return view('home', ['users' => $users, 'deleted'  => $deleted]);
     }
     public function deleteUser($id)
     {
-          DB::table('users')->where('id',$id)->delete();
-          return redirect()->route('getUsers');
+          $user = DB::table('users')->where('id',$id)->get();
+
+            DB::table('deleted')->insert(
+              ['name' => $user[0]->name , 'email' => $user[0]->email, 'password' => $user[0]->password]
+            );
+            DB::table('users')->where('id',$id)->delete();
+          $users = DB::table('users')->select('id','name')->get();
+          $deleted = DB::table('deleted')->select('name')->get();
+          return view('home', ['users' => $users, 'deleted'  => $deleted]);
      }
+
      public function editUser($id)
      {
            $user = DB::table('users')->where('id',$id)->get();
@@ -55,7 +65,8 @@ class HomeController extends Controller
                 ->where('id', $id)
                 ->update(['name' =>  $user->name, 'email' =>  $user->email]);
                $users = DB::table('users')->select('id','name')->get();
-               return view('home', compact('users'));
+               $deleted = DB::table('deleted')->select('name')->get();
+               return view('home', ['users' => $users, 'deleted'  => $deleted]);
            }
 
      }

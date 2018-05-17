@@ -19,12 +19,14 @@
                         <center> "Com grandes poderes, vêm grandes responsabilidades.” - Stan Lee
                         <br>
                         -- Lista de usuários menos o ADM -- </center>
+
                         <?php foreach ($users as $user): ?>
                             <?php if ($user->name != 'admin' ): ?>
                                 <div class="row">
                                     <div class="col-md-12">
                                       <div class="col-md-6" style="margin-bottom:10px; margin-top:10px;">
                                         <li> {{ $user->name}}</li>
+
                                       </div>
 
                                       <div class="col-md-3" style="margin-bottom:10px; margin-top:10px;">
@@ -41,9 +43,20 @@
                                 </div>
                             <?php endif; ?>
                         <?php endforeach; ?>
+
+                    <?php if ($deleted != "[]"): ?>
+                    <center><h1 style="margin-top:50px;"> Lista de usuários deletados<h1></center>
+                    <?php foreach ($deleted as $delete): ?>
+                            <div class="row">
+                                <div class="col-md-12">
+                                  <div class="col-md-6" style="margin-bottom:10px; margin-top:10px;">
+                                    <li> {{ $delete->name}}</li>
+                                  </div>
+                                </div>
+                            </div>
+                    <?php endforeach; ?>
                   <?php endif; ?>
-
-
+                <?php endif; ?>
                 </div>
             </div>
         </div>
