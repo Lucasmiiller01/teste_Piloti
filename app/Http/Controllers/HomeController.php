@@ -39,5 +39,25 @@ class HomeController extends Controller
           DB::table('users')->where('id',$id)->delete();
           return redirect()->route('getUsers');
      }
+     public function editUser($id)
+     {
+           $user = DB::table('users')->where('id',$id)->get();
+           return view('edit',compact('user'));
+     }
+     public function updateUser(Request $request, $id)
+     {
+           $user = DB::table('users')->where('id',$id)->get();
+           if($request-> input('name') != "" || $request-> input('email') != "")
+           {
+               $user->name =  $request-> input('name');
+               $user->email =  $request-> input('email');
+               DB::table('users')
+                ->where('id', $id)
+                ->update(['name' =>  $user->name, 'email' =>  $user->email]);
+               $users = DB::table('users')->select('id','name')->get();
+               return view('home', compact('users'));
+           }
+
+     }
 
 }

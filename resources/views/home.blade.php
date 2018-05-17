@@ -29,13 +29,13 @@
 
                                       <div class="col-md-3" style="margin-bottom:10px; margin-top:10px;">
                                         {{ Form::open(['method' => 'DELETE', 'route' => ['deleteUser', $user->id]]) }}
-                                        {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+                                        {{ Form::submit('Deletar', ['class' => 'btn btn-danger']) }}
                                         {{ Form::close() }}
                                       </div>
                                       <div class="col-md-3" style="margin-bottom:10px; margin-top:10px;">
-                                        <form action="" method="get">
-                                             <input type="submit" value="Editar" name="{{ $user->id}}" class="btn btn-primary">
-                                        </form>
+                                        {{ Form::open(['method' => 'GET', 'route' => ['editUser', $user->id]]) }}
+                                        {{ Form::submit('Editar', ['class' => 'btn btn-danger']) }}
+                                        {{ Form::close() }}
                                       </div>
                                     </div>
                                 </div>
