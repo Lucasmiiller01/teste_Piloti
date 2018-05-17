@@ -1,4 +1,4 @@
 # teste_Piloti
 
-Conta admin: E-mail - admin@admin.com
-			 Senha - 123456
+Conta para acesso de administração: E-mail - admin@admin.com, Senha - 123456
+			 
