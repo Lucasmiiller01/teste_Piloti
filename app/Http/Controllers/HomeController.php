@@ -25,11 +25,19 @@ class HomeController extends Controller
      */
     public function index()
     {
+        return view('home');
+    }
 
+    public function getUsers()
+    {
         $users = DB::table('users')->select('id','name')->get();
-
         return view('home', ['users' => $users]);
-
         dd($users);
     }
+    public function deleteUser($id)
+    {
+          DB::table('users')->where('id',$id)->delete();
+          return redirect()->route('getUsers');
+     }
+
 }
