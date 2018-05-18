@@ -14,7 +14,25 @@
                         </div>
                     @endif
                     Olá, {{ Auth::user()->name }}.
+                <?php if (Auth::user()->name != 'admin'): ?>
+                        <center> Você só possui acesso de usuário.
+                        <br>
+                        -- Bem-vindo usuário -- </center>
 
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="col-md-6" style="margin-bottom:10px; margin-top:10px;">
+                         <li> Meu usuário - {{ Auth::user()->name}}</li>
+                      </div>
+
+                      <div class="col-md-6" style="margin-bottom:10px; margin-top:10px;">
+                        {{ Form::open(['method' => 'GET', 'route' => ['editUser', Auth::user()->id]]) }}
+                        {{ Form::submit('Editar', ['class' => 'btn btn-danger']) }}
+                        {{ Form::close() }}
+                      </div>
+                     </div>
+                    </div>
+                    <?php endif; ?>
                     <?php if (Auth::user()->name == 'admin'): ?>
                         <center> "Com grandes poderes, vêm grandes responsabilidades.” - Stan Lee
                         <br>
